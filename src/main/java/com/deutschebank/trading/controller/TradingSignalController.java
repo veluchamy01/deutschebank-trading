@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.deutschebank.trading.dto.SignalDto;
 import com.deutschebank.trading.service.SignalHandler;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * REST Controller for trading service
  * 
@@ -22,6 +24,7 @@ import com.deutschebank.trading.service.SignalHandler;
  */
 @RestController
 @RequestMapping("/trading-signals")
+@Slf4j
 public class TradingSignalController {
 
 	@Autowired
@@ -35,9 +38,11 @@ public class TradingSignalController {
 	 */
 	@PostMapping
 	public ResponseEntity<String> processSignals(@RequestBody SignalDto signalDto) {
-
+		log.info("TradingSignal controller invoked with signal {}.", signalDto.getSignal());
+		
 		signalHandler.handleSignal(signalDto.getSignal());
-
+		
+		log.info("TradingSignal controller exit with success response.");
 		return new ResponseEntity<>("Signal sent for processing", HttpStatus.CREATED);
 	}
 
