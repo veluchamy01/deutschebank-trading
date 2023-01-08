@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TradingServiceApplication {
+public class TradingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TradingServiceApplication.class, args);
+		SpringApplication.run(TradingApplication.class, args);
 	}
 
 }
