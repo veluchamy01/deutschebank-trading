@@ -71,6 +71,22 @@ class TradingApplicationTests {
 				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isCreated())
 				.andExpect(jsonPath("$.message").value("signal sent for processing"));
 	}
+	
+	/**
+	 * Test for successful scenario of processing trading signal two
+	 */
+	@Test
+	void test_processSignalThree_Success() throws Exception {
+		TradingSignalRequestDto tradingSignalRequestDto = new TradingSignalRequestDto();
+		tradingSignalRequestDto.setSignal(3);
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.findAndRegisterModules();
+
+		mockMvc.perform(post("/trading-signals").content(objectMapper.writeValueAsString(tradingSignalRequestDto))
+				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isCreated())
+				.andExpect(jsonPath("$.message").value("signal sent for processing"));
+	}
 
 	/**
 	 * Test for error scenario while processing trading signal

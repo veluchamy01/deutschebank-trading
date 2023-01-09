@@ -59,6 +59,21 @@ class TradingSignalControllerTest {
 		Assertions.assertThat(result.getBody().getMessage()).contains("signal sent for processing");
 		Assertions.assertThat(result.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(201));
 	}
+	
+	/**
+	 * Test for successful scenario of processing trading signal two
+	 */
+	@Test
+	void test_processSignalThree_Success() {
+		TradingSignalRequestDto tradingSignalRequestDto = new TradingSignalRequestDto();
+		tradingSignalRequestDto.setSignal(3);
+
+		ResponseEntity<TradingSignalResponseDto> result = tradingSignalController
+				.processSignals(tradingSignalRequestDto);
+
+		Assertions.assertThat(result.getBody().getMessage()).contains("signal sent for processing");
+		Assertions.assertThat(result.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(201));
+	}
 
 	/**
 	 * Test for error scenario while processing trading signal
