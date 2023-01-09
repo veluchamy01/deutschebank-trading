@@ -52,7 +52,7 @@ public class TradingSignalController {
 		log.info("TradingSignal controller invoked with signal {}.", signal);
 
 		SignalHandler signalHandler = this.signalFactory.get(String.valueOf(signal));
-		signalHandler.handleSignal(tradingSignalRequestDto.getSignal());
+		signalHandler.handleSignal(signal);
 
 		log.info("TradingSignal controller exit with success response.");
 		return new ResponseEntity<>(
