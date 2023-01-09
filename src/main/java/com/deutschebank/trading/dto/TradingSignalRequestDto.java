@@ -19,7 +19,7 @@ public class TradingSignalRequestDto {
 
 	@NotNull(message = "{signal.empty}")
 	@Min(value = 1, message = "{signal.invalid}")
-	@Max(value = 1, message = "{signal.invalid}")
+	@Max(value = 2, message = "{signal.invalid}")
 	private Integer signal;
 
 }

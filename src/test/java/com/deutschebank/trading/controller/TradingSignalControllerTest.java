@@ -31,12 +31,27 @@ class TradingSignalControllerTest {
 	private TradingSignalController tradingSignalController;
 
 	/**
-	 * Test for successful scenario of processing trading signal
+	 * Test for successful scenario of processing trading signal one
 	 */
 	@Test
-	void test_processSignals_Success() {
+	void test_processSignalOne_Success() {
 		TradingSignalRequestDto tradingSignalRequestDto = new TradingSignalRequestDto();
 		tradingSignalRequestDto.setSignal(1);
+
+		ResponseEntity<TradingSignalResponseDto> result = tradingSignalController
+				.processSignals(tradingSignalRequestDto);
+
+		Assertions.assertThat(result.getBody().getMessage()).contains("signal sent for processing");
+		Assertions.assertThat(result.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(201));
+	}
+
+	/**
+	 * Test for successful scenario of processing trading signal two
+	 */
+	@Test
+	void test_processSignalTwo_Success() {
+		TradingSignalRequestDto tradingSignalRequestDto = new TradingSignalRequestDto();
+		tradingSignalRequestDto.setSignal(2);
 
 		ResponseEntity<TradingSignalResponseDto> result = tradingSignalController
 				.processSignals(tradingSignalRequestDto);

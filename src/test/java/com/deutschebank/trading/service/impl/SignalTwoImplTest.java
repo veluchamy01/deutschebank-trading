@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.deutschebank.trading.service.impl;
 
 import static org.mockito.Mockito.verify;
@@ -12,16 +15,15 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.deutschebank.trading.external.algo.Algo;
 
 /**
- * Tests the service implementation layer of {@link SignalHandlerImpl}
- * 
+ * Tests the service implementation layer of {@link SignalTwoImpl}
  * @author veluchamy.jeganathan
  *
  */
 @ExtendWith(MockitoExtension.class)
-class SignalHandlerImplTest {
+class SignalTwoImplTest {
 
 	@InjectMocks
-	private SignalHandlerImpl signalHandlerImpl;
+	private SignalTwoImpl signalTwoImpl;
 
 	@Mock
 	private Algo algo;
@@ -31,17 +33,15 @@ class SignalHandlerImplTest {
 	 */
 	@Test
 	void test_handleSignal() {
-		Mockito.doNothing().when(algo).setUp();
-		Mockito.doNothing().when(algo).setAlgoParam(1, 60);
-		Mockito.doNothing().when(algo).performCalc();
+		Mockito.doNothing().when(algo).reverse();
+		Mockito.doNothing().when(algo).setAlgoParam(1, 80);
 		Mockito.doNothing().when(algo).submitToMarket();
 		Mockito.doNothing().when(algo).doAlgo();
 
-		signalHandlerImpl.handleSignal(1);
+		signalTwoImpl.handleSignal(2);
 
-		verify(algo).setUp();
-		verify(algo).setAlgoParam(1, 60);
-		verify(algo).performCalc();
+		verify(algo).reverse();
+		verify(algo).setAlgoParam(1, 80);
 		verify(algo).submitToMarket();
 		verify(algo).doAlgo();
 	}
