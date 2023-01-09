@@ -3,10 +3,13 @@
  */
 package com.deutschebank.trading.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.deutschebank.trading.external.algo.Algo;
 import com.deutschebank.trading.service.SignalHandler;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service implementation layer for {@link SignalHandler}
@@ -14,41 +17,22 @@ import com.deutschebank.trading.service.SignalHandler;
  * @author veluchamy.jeganathan
  *
  */
-@Service
+@Service("1")
+@Slf4j
 public class SignalHandlerImpl implements SignalHandler {
+
+	@Autowired
+	private Algo algo;
 
 	@Override
 	public void handleSignal(int signal) {
-		Algo algo = new Algo();
-
-		switch (signal) {
-		case 1:
-			algo.setUp();
-			algo.setAlgoParam(1, 60);
-			algo.performCalc();
-			algo.submitToMarket();
-			break;
-
-		case 2:
-			algo.reverse();
-			algo.setAlgoParam(1, 80);
-			algo.submitToMarket();
-			break;
-
-		case 3:
-			algo.setAlgoParam(1, 90);
-			algo.setAlgoParam(2, 15);
-			algo.performCalc();
-			algo.submitToMarket();
-			break;
-
-		default:
-			algo.cancelTrades();
-			break;
-		}
-
+		log.debug("Inside handle signal implementation");
+		algo.setUp();
+		algo.setAlgoParam(1, 60);
+		algo.performCalc();
+		algo.submitToMarket();
 		algo.doAlgo();
-
+		log.debug("Exit handle signal implementation");
 	}
 
 }
